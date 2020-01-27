@@ -19,11 +19,11 @@ def main():
 
     # Read image
     #for f in files:
-    camera = picamera.PiCamera()
-    camera.resolution = (640, 480);
-    sleep(2)
-    img = '/home/pi/Desktop/inputimg/carpetline.jpg'
-    Outputimg = '/home/pi/desktop/output6.jpg'
+    #camera = picamera.PiCamera()
+    #camera.resolution = (640, 480);
+    #sleep(2)
+    img = '/home/pi/Desktop/NATCAR/opencv_test/inputimg/carpetline.jpg'
+    Outputimg = '/home/pi/Desktop/output6.jpg'
     #camera.capture(img)
     img = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
 
@@ -40,7 +40,7 @@ def showOriginal(img, f):
     cv2.imshow('Original Image Thresholded', img)
 
     # Save to file
-    cv2.imwrite('/home/pi/Desktop/output/thresh1.jpg', img)
+    cv2.imwrite('/home/pi/Desktop/thresh1.jpg', img)
 
 def showProcessed(img, f):
     # Image processing
@@ -96,7 +96,7 @@ def showProcessed(img, f):
     cv2.waitKey(0)
 
     # Save to file
-    cv2.imwrite('/home/pi/Desktop/output/thresh&blur1.jpg', img)
+    cv2.imwrite('/home/pi/Desktop/thresh&blur1.jpg', img)
 
 if __name__ == '__main__':
     main()

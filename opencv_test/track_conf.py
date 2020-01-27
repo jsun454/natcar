@@ -46,3 +46,4 @@ max_steps = 40
 
 # target brightness level
 brightness = 100
+print("hellooooo")

@@ -106,16 +106,20 @@ def handle_pic(path, fout = None, show = False):
 
     if image is None:
         logging.warning(("File not found", path))
+        print("1")
         return None, None
     cropped, w, h = prepare_pic(image)
     if cropped is None:
+        print("2")
         return None, None
     cont, box = find_main_countour(cropped)
     if cont is None:
+        print("3")
         return None, None
 
     p1, p2 = geom.calc_box_vector(box)
     if p1 is None:
+        print("4")
         return None, None
 
     angle = geom.get_vert_angle(p1, p2, w, h)
@@ -216,7 +220,7 @@ def test():
 def lineFollow(i):
     if len(sys.argv) > 1:
         pic = sys.argv[1]
-
+    
     """
     fname = "photos/" + pic + ".jpg"
     angle, shift = handle_pic2(fname, fout="out.jpg", show=True)
