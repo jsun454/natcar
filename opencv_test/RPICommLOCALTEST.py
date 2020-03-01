@@ -1,17 +1,14 @@
 import serial
 import time
 import sys
-from lineFollow2 import lineFollow, handle_pic
+# from lineFollow2 import lineFollow
+from lineFollowLOCALTEST import handle_pic
 sys.path.insert(1, '../pi_cam')
 from timelapse2 import takePicture
-import testImgStream2
-import threading
-
-def setup():
-    testImgStream2.startStream()
+from imgStream import initStream, closeStream
 
 def comm(firstAngle):
-    s = serial.Serial('/dev/ttyUSB0', 9600)
+    s = serial.Serial('/dev/ttyACM0', 9600)
     time.sleep(1.65)
     try:
         firstAngle = ord(firstAngle)
@@ -25,12 +22,13 @@ def comm(firstAngle):
         firstAngle = int(firstAngle)
         s.write(str.encode(chr(firstAngle)))
         i = 1
+        initStream()
         while True:
             response = s.readline()
             print(response)
             if response == b'DONE\r\n':
-                img = testImgStream2.getImage()
-                angle, shift = handle_pic(img)
+                takePicture(i)
+                angle, shift = lineFollow(i)
                 if angle is None:
                     angle = 120
                 #time.sleep(0.2)
@@ -42,7 +40,7 @@ def comm(firstAngle):
                 i+=1
     except KeyboardInterrupt:
         s.close()
-    
+
 # if __name__ == '__main__':
 #     angle = '1'
-#     comm(angle)             
+#     comm(angle)
